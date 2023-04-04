@@ -6,10 +6,11 @@ import matrices
 FOCAL_STEP = 2.
 TRANSLATION_STEP = 40.
 ROTATION_STEP = np.radians(10.8)
+MIN_FOCAL = 100
 
 
 def handle_zoom(keys, focal):
-    if keys[pygame.K_MINUS]:
+    if keys[pygame.K_MINUS] and focal > MIN_FOCAL:
         return focal - FOCAL_STEP
     if keys[pygame.K_EQUALS]:
         return focal + FOCAL_STEP
