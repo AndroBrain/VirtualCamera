@@ -27,3 +27,5 @@ print(line(top_rect[0], top_rect[1]))
 print(line(top_rect[0], top_rect[2]))
 print(line(top_rect[2], top_rect[3]))
 print(line(top_rect[1], top_rect[3]))
+
+# Copy and paste to file. Representation is made as edges
