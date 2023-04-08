@@ -1,3 +1,4 @@
+import math
 from typing import Tuple
 
 import numpy as np
@@ -11,8 +12,13 @@ from worldMap import load_figures_from_path
 
 # Map 3D map to 2D display
 def projection(point_3d: np.array, view_width: float, view_height: float, focal: float) -> Tuple[float, float]:
+    # f / z
     from_focal = abs(focal / point_3d[1])
+
+    # We need to move to the middle of the camera
+    # x' = x * (f / z)
     x = from_focal * point_3d[0] + view_width / 2
+    # y' = y * (f / z)
     y = view_height / 2 - from_focal * point_3d[2]
 
     return x, y

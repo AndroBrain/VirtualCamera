@@ -10,9 +10,9 @@ MIN_FOCAL = 100
 
 
 def handle_zoom(keys, focal):
-    if keys[pygame.K_MINUS] and focal > MIN_FOCAL:
+    if keys[pygame.K_x] and focal > MIN_FOCAL:
         return focal - FOCAL_STEP
-    if keys[pygame.K_EQUALS]:
+    if keys[pygame.K_z]:
         return focal + FOCAL_STEP
     return focal
 
@@ -77,9 +77,9 @@ right_rotation = matrices.y_rotation_matrix(-ROTATION_STEP * 2)
 
 
 def handle_bias_looking(keys, wireframes):
-    if keys[pygame.K_u]:
+    if keys[pygame.K_q]:
         for wireframe in wireframes:
             wireframe.transform(left_rotation)
-    if keys[pygame.K_o]:
+    if keys[pygame.K_e]:
         for wireframe in wireframes:
             wireframe.transform(right_rotation)
