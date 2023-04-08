@@ -5,12 +5,12 @@ from typing import List, Tuple
 import numpy as np
 
 
-def load_models_from_folder(foler_name: str) -> List:
-    files = [f for f in listdir(foler_name) if isfile(join(foler_name, f))]
-    return [Wireframe.load_from_file(join(foler_name, f)) for f in files]
+def load_figures_from_path(path: str) -> List:
+    files = [f for f in listdir(path) if isfile(join(path, f))]
+    return [WorldMap.load_from_file(join(path, f)) for f in files]
 
 
-class Wireframe:
+class WorldMap:
 
     def __init__(self):
         super().__init__()
@@ -55,7 +55,7 @@ class Wireframe:
         sorted_points = sorted(loaded_points.items(), key=lambda x: x[1])
         sorted_points = list(zip(*sorted_points))[0]
 
-        wireframe = Wireframe()
+        wireframe = WorldMap()
         wireframe.add_nodes(np.array(sorted_points))
         wireframe.add_edges(loaded_edges)
 

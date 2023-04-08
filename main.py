@@ -6,7 +6,7 @@ import pygame
 import matrices
 from Controls import handle_zoom, handle_horizontal_movement, handle_vertical_movement, handle_looking, \
     handle_bias_looking
-from wireframe import load_models_from_folder
+from worldMap import load_figures_from_path
 
 
 # Map 3D map to 2D display
@@ -30,10 +30,7 @@ edge_width = 2
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption('Virtual Camera')
 
-wireframes = load_models_from_folder('models')
-
-# transformation = matrices.translation_matrix(-200, 0, -300)
-# wireframes[0].transform(transformation)
+world_map = load_figures_from_path('models')
 
 FOCAL_LIMITS = 20., 500.
 FOCAL_STEP = 2.
@@ -51,15 +48,15 @@ while running:
 
         focal = handle_zoom(keys, focal)
 
-        handle_horizontal_movement(keys, wireframes)
-        handle_vertical_movement(keys, wireframes)
+        handle_horizontal_movement(keys, world_map)
+        handle_vertical_movement(keys, world_map)
 
-        handle_looking(keys, wireframes)
-        handle_bias_looking(keys, wireframes)
+        handle_looking(keys, world_map)
+        handle_bias_looking(keys, world_map)
 
     # Draw
     screen.fill((0, 0, 0))
-    for wireframe in wireframes:
+    for wireframe in world_map:
         for edge in wireframe.edges:
             a, b = wireframe.nodes[edge[0]], wireframe.nodes[edge[1]]
 
