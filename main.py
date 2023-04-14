@@ -1,10 +1,8 @@
-import math
 from typing import Tuple
 
 import numpy as np
 import pygame
 
-import matrices
 from Controls import handle_zoom, handle_horizontal_movement, handle_vertical_movement, handle_looking, \
     handle_bias_looking
 from worldMap import load_figures_from_path
@@ -63,12 +61,13 @@ while running:
     # Draw
     screen.fill((0, 0, 0))
     for wireframe in world_map:
-        for edge in wireframe.edges:
-            a, b = wireframe.nodes[edge[0]], wireframe.nodes[edge[1]]
+        for triangle in wireframe.triangles:
+            a, b, c = wireframe.nodes[triangle[0]], wireframe.nodes[triangle[1]], wireframe.nodes[triangle[2]]
 
-            if is_point_visible(a, focal) or is_point_visible(b, focal):
+            if is_point_visible(a, focal) or is_point_visible(b, focal) or is_point_visible(c, focal):
                 a = projection(a, *screen_size, focal)
                 b = projection(b, *screen_size, focal)
-                pygame.draw.line(screen, edge_color, a, b, edge_width)
+                c = projection(c, *screen_size, focal)
+                pygame.draw.polygon(screen, edge_color, [a, b, c])
 
     pygame.display.flip()
