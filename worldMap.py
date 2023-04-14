@@ -26,7 +26,7 @@ class WorldMap:
         self.nodes = np.vstack([self.nodes, with_ones])
 
     def add_triangles(self, triangle_list: List[Tuple[int, int, int]]) -> None:
-        self.colors.append((200, 200, random.randrange(255)))
+        self.colors.append((random.randrange(255), random.randrange(255), random.randrange(255)))
         self.triangles.extend(triangle_list)
 
     def transform(self, transformation_matrix: np.array) -> None:

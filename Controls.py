@@ -4,7 +4,7 @@ import pygame
 import matrices
 
 FOCAL_STEP = 2.
-TRANSLATION_STEP = 40.
+TRANSLATION_STEP = 20.
 ROTATION_STEP = np.radians(10.8)
 MIN_FOCAL = 100
 
