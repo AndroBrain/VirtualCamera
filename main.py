@@ -61,13 +61,15 @@ while running:
     # Draw
     screen.fill((0, 0, 0))
     for wireframe in world_map:
-        for triangle in wireframe.triangles:
+        # trianglesWithColors = (wireframe.triangles, wireframe.colors)
+        for triangle, color in zip(wireframe.triangles, wireframe.colors):
+            print(color)
             a, b, c = wireframe.nodes[triangle[0]], wireframe.nodes[triangle[1]], wireframe.nodes[triangle[2]]
 
             if is_point_visible(a, focal) or is_point_visible(b, focal) or is_point_visible(c, focal):
                 a = projection(a, *screen_size, focal)
                 b = projection(b, *screen_size, focal)
                 c = projection(c, *screen_size, focal)
-                pygame.draw.polygon(screen, edge_color, [a, b, c])
+                pygame.draw.polygon(screen, color, [a, b, c])
 
     pygame.display.flip()

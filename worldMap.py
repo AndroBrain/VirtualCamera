@@ -1,3 +1,4 @@
+import random
 from os import listdir
 from os.path import isfile, join
 from typing import List, Tuple
@@ -18,13 +19,15 @@ class WorldMap:
         self.nodes = np.zeros([0, 4])  # Format: (x, y, z, 1)
         # Edges are list of tuples that are numbers of given nodes
         self.triangles = []
+        self.colors = []
 
     def add_nodes(self, nodes: np.array) -> None:
         with_ones = np.hstack([nodes, np.ones([nodes.shape[0], 1])])
         self.nodes = np.vstack([self.nodes, with_ones])
 
-    def add_edges(self, edge_list: List[Tuple[int, int, int]]) -> None:
-        self.triangles.extend(edge_list)
+    def add_triangles(self, triangle_list: List[Tuple[int, int, int]]) -> None:
+        self.colors.append((200, 200, random.randrange(255)))
+        self.triangles.extend(triangle_list)
 
     def transform(self, transformation_matrix: np.array) -> None:
         # Matrix multiplication
@@ -43,9 +46,9 @@ class WorldMap:
                 middle = tuple(points[3:6])
                 end = tuple(points[6:])
 
-                print(start)
-                print(middle)
-                print(end)
+                # print(start)
+                # print(middle)
+                # print(end)
 
                 for point in (start, middle, end):
                     if point not in loaded_points:
@@ -59,6 +62,6 @@ class WorldMap:
 
         wireframe = WorldMap()
         wireframe.add_nodes(np.array(sorted_points))
-        wireframe.add_edges(loaded_triangles)
+        wireframe.add_triangles(loaded_triangles)
 
         return wireframe
